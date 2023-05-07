@@ -28,7 +28,7 @@ def get_bp_v1() -> Blueprint:
     return blueprint
 
 
-FLASK_RUN_PORT = 55000
+FLASK_RUN_PORT = 5500
 FLASK_DEBUG = True
 
 # 환경변수 로딩
