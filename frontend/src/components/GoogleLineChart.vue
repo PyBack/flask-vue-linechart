@@ -46,10 +46,11 @@ export default {
 
           const eps_data = response.data
           // Extract the stock symbol and data points from the response
-          const ticker = Object.keys(eps_data)[0];
+          const ticker1 = Object.keys(eps_data)[0];
+          const ticker2 = Object.keys(eps_data)[1];
 
-          const data1 = eps_data['AAPL']
-          const data2 = eps_data['MSFT']
+          const data1 = eps_data[ticker1]
+          const data2 = eps_data[ticker2]
 
           const chartData = []
 
@@ -59,8 +60,7 @@ export default {
           }
 
           // Set the chart data
-          this.ticker = ticker;
-          this.chartData = [['Date', 'AAPL', 'MSFT'], ...chartData];
+          this.chartData = [['Date', ticker1, ticker2], ...chartData];
       }
       catch (error){
           console.error(error);
