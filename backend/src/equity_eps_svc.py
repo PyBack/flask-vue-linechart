@@ -15,10 +15,21 @@ class EquityEPS(Resource):
         if ticker is None:
             ticker = 'AAPL'
 
-        result = [['2022.03', 6.15],
+        data_aapl = [['2022.03', 6.15],
                   ['2022.06', 6.05],
                   ['2022.09', 6.11],
                   ['2022.12', 5.89],
                   ]
-        return {ticker: result}
+
+        data_msft = [['2022.03', 2.22],
+                     ['2022.06', 2.24],
+                     ['2022.09', 2.35],
+                     ['2022.12', 2.20],
+                    ]
+        result = {'AAPL': data_aapl,
+                  'MSFT': data_msft,
+                  }
+
+        return result
+
 
