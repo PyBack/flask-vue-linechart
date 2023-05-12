@@ -2,7 +2,7 @@ import os
 import site
 import traceback
 
-from flask import Flask, jsonify, request, session, Response
+from flask import Flask, jsonify
 from flask import Blueprint
 from flask_cors import CORS
 from flask_restx import Api, Resource, reqparse
@@ -18,13 +18,14 @@ site.addsitedir(pjt_home_path)
 site.addsitedir(src_path)
 
 # from utils.comn_logger import comn_logger
-from equity_eps_svc import equity_eps_ns
+import views.controlller as views
+from svc.equity_svc_sample import equity_ns_v1
 
 
 def get_bp_v1() -> Blueprint:
     blueprint = Blueprint('api_1', __name__, url_prefix='/api/v1')
-    api = Api(blueprint, title='Flask API v0.0', version='0.0', description='Flask API v0.0')
-    api.add_namespace(equity_eps_ns)
+    api = Api(blueprint, title='Flask API v0.1', version='0.1', description='Flask API v0.1')
+    api.add_namespace(equity_ns_v1)
     return blueprint
 
 
@@ -46,6 +47,8 @@ app.register_blueprint(get_bp_v1())
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
+views.create_equity_namespace()
+app.register_blueprint(views.blueprint)
 
 @app.route('/health_check', methods=['GET'])
 def health_check():

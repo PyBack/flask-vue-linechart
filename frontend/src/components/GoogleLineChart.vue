@@ -35,7 +35,7 @@ export default {
   methods: {
     async getData() {
       try {
-          let path = "http://" + window.location.hostname + ":5050/api/v1/equity_eps";
+          let path = "http://" + window.location.hostname + ":5050/api/v2/equity/eps";
           const response = await axios.get(path)
 
           // const salesData = response.data
