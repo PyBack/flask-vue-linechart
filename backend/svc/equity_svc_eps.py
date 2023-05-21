@@ -12,6 +12,10 @@ class EquityEPS(Resource):
     parser.add_argument('ticker', type=str, help='Ticker')
 
     @equity_ns_v2.expect(parser)
+    @equity_ns_v2.doc(responses={
+        200: 'Success',
+        400: 'Validation Error'
+    })
     def get(self):
         """
         AAPL, MSFT EPS 데이터 반환

@@ -11,6 +11,10 @@ class EquitySample(Resource):
     parser.add_argument('ticker', type=str, help='Ticker')
 
     @equity_ns_v2.expect(parser)
+    @equity_ns_v2.doc(responses={
+        200: 'Success',
+        400: 'Validation Error'
+    })
     def get(self):
         """
         Ticker 이름 echo 기능
