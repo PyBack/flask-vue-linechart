@@ -2,14 +2,15 @@ from flask_restx import Resource, Namespace
 from flask_restx import reqparse
 
 equity_ns_v1 = Namespace('equity', 'equity data service v1')
+equity_ns_v2 = Namespace('equity', 'equity data service v2')
 
 
-# @equity_ns_v1.route('/eps')
+# @equity_ns_v2.route('/eps')
 class EquityEPS(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('ticker', type=str, help='Ticker')
 
-    @equity_ns_v1.expect(parser)
+    @equity_ns_v2.expect(parser)
     def get(self):
         args = self.parser.parse_args()
         ticker = args['ticker']
