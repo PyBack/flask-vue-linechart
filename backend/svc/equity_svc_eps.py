@@ -1,5 +1,6 @@
 from flask_restx import Resource, Namespace
 from flask_restx import reqparse
+from dao.select_equity_eps import select_equity_eps
 
 equity_ns_v1 = Namespace('equity', 'equity data service v1')
 equity_ns_v2 = Namespace('equity', 'equity data service v2')
@@ -12,22 +13,16 @@ class EquityEPS(Resource):
 
     @equity_ns_v2.expect(parser)
     def get(self):
+        """
+        AAPL, MSFT EPS 데이터 반환
+        """
         args = self.parser.parse_args()
         ticker = args['ticker']
         if ticker is None:
             ticker = 'AAPL'
 
-        data_aapl = [['2022.03', 6.15],
-                  ['2022.06', 6.05],
-                  ['2022.09', 6.11],
-                  ['2022.12', 5.89],
-                  ]
-
-        data_msft = [['2022.03', 2.22],
-                     ['2022.06', 2.24],
-                     ['2022.09', 2.35],
-                     ['2022.12', 2.20],
-                    ]
+        data_aapl = select_equity_eps('AAPL')
+        data_msft = select_equity_eps('MSFT')
 
         result = {'AAPL': data_aapl,
                   'MSFT': data_msft,
