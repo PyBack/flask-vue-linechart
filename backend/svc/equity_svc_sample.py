@@ -13,7 +13,8 @@ class EquitySample(Resource):
     @equity_ns_v2.expect(parser)
     @equity_ns_v2.doc(responses={
         200: 'Success',
-        400: 'Validation Error'
+        400: 'Validation Error',
+        404: 'Not Found API'
     })
     def get(self):
         """
@@ -21,5 +22,8 @@ class EquitySample(Resource):
         """
         args = self.parser.parse_args()
         ticker = args['ticker']
+
+        # print(ticker)
+        equity_ns_v2.logger.info("ticker: " + ticker)
 
         return ticker
