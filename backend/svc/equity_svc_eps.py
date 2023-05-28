@@ -1,5 +1,7 @@
+from flask import current_app
 from flask_restx import Resource, Namespace
 from flask_restx import reqparse
+
 from dao.select_equity_eps import select_equity_eps
 
 equity_ns_v1 = Namespace('equity', 'equity data service v1')
@@ -31,6 +33,8 @@ class EquityEPS(Resource):
         result = {'AAPL': data_aapl,
                   'MSFT': data_msft,
                   }
+
+        current_app.logger.info(str(result))
 
         return result
 

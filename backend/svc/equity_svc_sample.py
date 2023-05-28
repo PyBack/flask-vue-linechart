@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_restx import Resource, Namespace
 from flask_restx import reqparse
 
@@ -24,6 +25,6 @@ class EquitySample(Resource):
         ticker = args['ticker']
 
         # print(ticker)
-        equity_ns_v2.logger.info("ticker: " + ticker)
+        current_app.logger.info("ticker: " + ticker)
 
         return ticker

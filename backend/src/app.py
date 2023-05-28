@@ -30,10 +30,11 @@ FLASK_DEBUG = True
 # os.environ
 # load_dotenv()
 
+# Flask root logger config
 dictConfig({
     'version': 1,
     'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(filename)s %(lineno)d: %(message)s',
+        'format': '%(asctime)s [%(levelname)s] %(filename)s %(lineno)d: %(message)s',
     }},
     'handlers': {'wsgi': {
         'class': 'logging.StreamHandler',
@@ -57,8 +58,8 @@ api = Api(app, version='0.0',
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-ctrl.create_equity_namespace()
 app.register_blueprint(ctrl.blueprint)
+ctrl.create_equity_namespace()
 
 
 @app.route('/health_check', methods=['GET'])
