@@ -24,7 +24,7 @@
 .idea
 /backend/.idea
 /frontend/.idea
-/frontend/.vscode
+#/frontend/.vscode
 /frontend/*.suo
 /frontend/*.ntvs*
 /frontend/*.njsproj
