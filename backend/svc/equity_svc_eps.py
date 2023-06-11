@@ -16,7 +16,10 @@ class EquityEPS(Resource):
     @equity_ns_v2.expect(parser)
     @equity_ns_v2.doc(responses={
         200: 'Success',
-        400: 'Validation Error'
+        400: 'Bad Request: 입력값 유효성 실패',
+        404: 'Not Found',
+        429: 'Too Many Requests',
+        500: 'Internal Server Error:  REST-API 서버 자체 애러,',
     })
     def get(self):
         """

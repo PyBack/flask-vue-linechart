@@ -68,7 +68,7 @@ def health_check():
     return jsonify('good')
 
 
-@app.route('/traceback_test', methods=['GET'])
+@app.route('/traceback-test', methods=['GET'])
 def traceback_test_router():
     msg = 'ok'
     try:
@@ -76,8 +76,7 @@ def traceback_test_router():
     except:
         msg = traceback.format_exc()
         app.logger.error(msg)
-        print(msg)
-    return jsonify(msg)
+    return jsonify(error=msg), 500
 
 
 if __name__ == '__main__':

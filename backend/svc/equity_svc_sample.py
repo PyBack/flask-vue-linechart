@@ -10,21 +10,34 @@ equity_ns_v2 = Namespace('equity', 'equity data service v2')
 class EquitySample(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('ticker', type=str, help='Ticker')
+    parser.add_argument('sector', type=str, help='sector choice: ', default='all',
+                        choices=['all', 'tech', 'energy', 'financial']
+                        )
 
     @equity_ns_v2.expect(parser)
     @equity_ns_v2.doc(responses={
         200: 'Success',
-        400: 'Validation Error',
-        404: 'Not Found API'
+        400: 'Bad Request: 입력값 유효성 실패',
+        404: 'Not Found',
+        429: 'Too Many Requests',
+        500: 'Internal Server Error:  REST-API 서버 자체 애러, ticker 이름 길이가 4를 초과 하면 애러 발생',
     })
     def get(self):
         """
-        Ticker 이름 echo 기능
+        Ticker, Sector echo 기능
         """
         args = self.parser.parse_args()
         ticker = args['ticker']
+        sector = args['sector']
 
         # print(ticker)
         current_app.logger.info("ticker: " + ticker)
+        current_app.logger.info("sector: " + sector)
 
-        return ticker
+        # error code test
+        if len(ticker) > 4:
+            current_app.logger.warning("len(ticker) > 4")
+            tmp = int(ticker)
+            # raise "len(ticker) > 4"
+
+        return [ticker, sector]
